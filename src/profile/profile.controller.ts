@@ -9,8 +9,10 @@ import {
 } from '@nestjs/common';
 import { ProfileService } from './profile.service';
 import { CreateProfileDto } from './dto';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('profile')
+@ApiTags('profile')
 export class ProfileController {
   constructor(private profileService: ProfileService) {}
 
