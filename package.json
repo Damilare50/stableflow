@@ -2,10 +2,11 @@
   "name": "stableflow",
   "version": "0.0.1",
   "description": "",
-  "author": "",
+  "author": "okubanjodamilare@outlook.com",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
+    "postinstall": "node-config-ts",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
@@ -22,7 +23,10 @@
   "dependencies": {
     "@nestjs/common": "^10.0.0",
     "@nestjs/core": "^10.0.0",
+    "@nestjs/mongoose": "^10.0.10",
     "@nestjs/platform-express": "^10.0.0",
+    "mongoose": "^8.7.1",
+    "node-config-ts": "^3.3.1",
     "reflect-metadata": "^0.2.0",
     "rxjs": "^7.8.1"
   },
