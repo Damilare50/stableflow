@@ -26,7 +26,7 @@ export class ProfileController {
     return {
       statusCode: HttpStatus.OK,
       data,
-      mesage: 'profile fetched successfully',
+      message: 'profile fetched successfully',
     };
   }
 
