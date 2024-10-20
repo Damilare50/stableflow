@@ -33,7 +33,7 @@ export class PaymentService {
     const validateID = isMongoId(id);
     if (!validateID) throw new BadRequestException('invalid ID passed!');
 
-    const payment = await this.paymentModel.findById(id);
+    const payment = await this.paymentModel.findById(id).populate('profile');
     if (!payment) throw new NotFoundException();
 
     return payment;
