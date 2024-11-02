@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Get,
+  Headers,
   HttpCode,
   HttpStatus,
   Param,
@@ -37,6 +38,18 @@ export class PaymentController {
       statusCode: HttpStatus.OK,
       data: response,
       message: 'payment fetched successfully',
+    };
+  }
+
+  @Get()
+  @HttpCode(HttpStatus.OK)
+  async listTransactions(@Headers('Authorization') authorization: string) {
+    const response = await this.paymentService.listTransactions(authorization);
+
+    return {
+      statusCode: HttpStatus.OK,
+      data: response,
+      message: 'transactions fetched successfully',
     };
   }
 }
