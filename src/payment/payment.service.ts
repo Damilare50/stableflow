@@ -59,9 +59,13 @@ export class PaymentService {
     if (!user) throw new UnauthorizedException('invalid userId');
 
     const walletAddress = user.wallet.address;
+
+    const profile = await this.profileModel.findOne({ walletAddress }).exec();
+    if (!profile) throw new UnauthorizedException('invalid user');
+
     const transactions: Payment[] = await this.paymentModel
-      .find({ profile: { walletAddress } })
-      .populate('profile');
+      .find({ profile: profile._id })
+      .exec();
 
     return transactions;
   }
