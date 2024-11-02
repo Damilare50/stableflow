@@ -43,7 +43,9 @@ export class PaymentController {
 
   @Get()
   @HttpCode(HttpStatus.OK)
-  async listTransactions(@Headers('Authorization') authorization: string) {
+  async listTransactions(
+    @Headers('Authorization') authorization: string,
+  ): Promise<any> {
     const response = await this.paymentService.listTransactions(authorization);
 
     return {

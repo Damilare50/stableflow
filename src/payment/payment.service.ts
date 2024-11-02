@@ -45,7 +45,7 @@ export class PaymentService {
     return payment;
   }
 
-  async listTransactions(authorization: string) {
+  async listTransactions(authorization: string): Promise<Payment[]> {
     const authToken: string = authorization.split(' ')[1];
 
     const jwtDataResponse = await this.authService.decodeJwt(authToken);
@@ -58,6 +58,11 @@ export class PaymentService {
     this.logger.debug(user);
     if (!user) throw new UnauthorizedException('invalid userId');
 
-    return true;
+    const walletAddress = user.wallet.address;
+    const transactions: Payment[] = await this.paymentModel
+      .find({ profile: { walletAddress } })
+      .populate('profile');
+
+    return transactions;
   }
 }
