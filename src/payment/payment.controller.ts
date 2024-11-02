@@ -7,10 +7,12 @@ import {
   HttpStatus,
   Param,
   Post,
+  UseGuards,
 } from '@nestjs/common';
 import { PaymentService } from './payment.service';
 import { ApiTags } from '@nestjs/swagger';
 import { CreatePaymentDto } from './dto';
+import { AuthGuard } from '../guards/auth.guard';
 
 @Controller('payment')
 @ApiTags('payment')
@@ -43,6 +45,7 @@ export class PaymentController {
 
   @Get()
   @HttpCode(HttpStatus.OK)
+  @UseGuards(AuthGuard)
   async listTransactions(
     @Headers('Authorization') authorization: string,
   ): Promise<any> {
