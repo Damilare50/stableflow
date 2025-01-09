@@ -6,6 +6,9 @@ export type PaymentDocument = HydratedDocument<Payment>;
 
 @Schema({ timestamps: true })
 export class Payment {
+  createdAt: Date;
+  updatedAt: Date;
+
   @Prop({ required: true, type: String })
   customerName: string;
 

@@ -5,6 +5,9 @@ export type ProfileDocument = HydratedDocument<Profile>;
 
 @Schema({ timestamps: true })
 export class Profile {
+  createdAt: Date;
+  updatedAt: Date;
+
   @Prop({ required: true, type: String })
   walletAddress: string;
 

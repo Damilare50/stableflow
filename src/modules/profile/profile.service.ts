@@ -28,6 +28,7 @@ export class ProfileService {
     const profile = await this.profileModel.create(data);
 
     await this.eventEmitter.emitAsync(Events.PROFILE_CREATED, profile);
+
     return profile;
   }
 
