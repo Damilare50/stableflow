@@ -3,11 +3,10 @@ import { AppController } from './app.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { config } from 'node-config-ts';
-import { ProfileModule } from './profile/profile.module';
-import { PaymentModule } from './payment/payment.module';
-import { SubscriptionModule } from './subscription/subscription.module';
-import { AuthModule } from './auth/auth.module';
-import { GeneralModule } from './general/general.module';
+import { PaymentModule } from './modules/payment/payment.module';
+import { ProfileModule } from './modules/profile/profile.module';
+import { SubscriptionModule } from './modules/subscription/subscription.module';
+import { GeneralModule } from './modules/general/general.module';
 
 @Module({
   imports: [
@@ -16,7 +15,6 @@ import { GeneralModule } from './general/general.module';
     ProfileModule,
     PaymentModule,
     SubscriptionModule,
-    AuthModule,
     GeneralModule,
   ],
   controllers: [AppController],

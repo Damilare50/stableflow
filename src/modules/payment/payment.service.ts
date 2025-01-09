@@ -6,11 +6,11 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Payment, Profile } from '../schemas';
+import { Payment, Profile } from '../../schemas';
 import { CreatePaymentDto } from './dto';
 import { Model } from 'mongoose';
 import { isMongoId } from 'class-validator';
-import { AuthService } from '../auth/auth.service';
+import { AuthService } from '../general/auth.service';
 
 @Injectable()
 export class PaymentService {

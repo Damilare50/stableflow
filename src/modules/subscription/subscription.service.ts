@@ -1,6 +1,6 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Subscription } from '../schemas';
+import { Subscription } from '../../schemas';
 import { Model } from 'mongoose';
 import { CreateMailSubscriptionDto } from './dto';
 

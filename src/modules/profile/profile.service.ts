@@ -5,7 +5,7 @@ import {
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Profile } from '../schemas';
+import { Profile } from '../../schemas';
 import { CreateProfileDto } from './dto';
 
 @Injectable()
