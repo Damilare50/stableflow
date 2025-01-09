@@ -30,6 +30,8 @@ export class AuthGuard implements CanActivate {
     this.logger.debug(user);
     if (!user) throw new UnauthorizedException('invalid userId');
 
+    request.user = user;
+
     return true;
   }
 }

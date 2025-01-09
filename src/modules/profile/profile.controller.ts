@@ -3,13 +3,18 @@ import {
   Controller,
   Get,
   HttpCode,
+  Headers,
   HttpStatus,
   Post,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { ProfileService } from './profile.service';
 import { CreateProfileDto } from './dto';
 import { ApiTags } from '@nestjs/swagger';
+import { AuthGuard } from '../../guards/auth.guard';
+import { User as AuthUser } from '../../decorator/user.decorator';
+import { User } from '@privy-io/server-auth';
 
 @Controller('profile')
 @ApiTags('profile')
@@ -32,8 +37,12 @@ export class ProfileController {
 
   @Post()
   @HttpCode(HttpStatus.OK)
-  async saveProfile(@Body() dto: CreateProfileDto): Promise<any> {
-    const data = await this.profileService.saveProfile(dto);
+  @UseGuards(AuthGuard)
+  async saveProfile(
+    @Body() dto: CreateProfileDto,
+    @AuthUser() user: User,
+  ): Promise<any> {
+    const data = await this.profileService.saveProfile(dto, user);
 
     return {
       statusCode: HttpStatus.OK,
