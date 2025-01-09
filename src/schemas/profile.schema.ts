@@ -10,6 +10,9 @@ export class Profile {
 
   @Prop({ required: true, type: String })
   businessName: string;
+
+  @Prop({ required: false, type: String })
+  email: string;
 }
 
 export const ProfileSchema = SchemaFactory.createForClass(Profile);

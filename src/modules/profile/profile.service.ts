@@ -7,11 +7,13 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Profile } from '../../schemas';
 import { CreateProfileDto } from './dto';
+import { EventEmitter2 } from '@nestjs/event-emitter';
 
 @Injectable()
 export class ProfileService {
   constructor(
     @InjectModel(Profile.name) private profileModel: Model<Profile>,
+    private eventEmitter: EventEmitter2,
   ) {}
 
   async #findProfile(walletAddress: string) {
