@@ -9,8 +9,9 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Payment, Profile } from '../../schemas';
 import { CreatePaymentDto } from './dto';
 import { Model } from 'mongoose';
-import { isMongoId } from 'class-validator';
 import { User } from '@privy-io/server-auth';
+import { EventEmitter2 } from '@nestjs/event-emitter';
+import { Events } from '../../enum';
 
 @Injectable()
 export class PaymentService {
@@ -19,6 +20,7 @@ export class PaymentService {
   constructor(
     @InjectModel(Payment.name) private paymentModel: Model<Payment>,
     @InjectModel(Profile.name) private profileModel: Model<Profile>,
+    private eventEmitter: EventEmitter2,
   ) {}
 
   async createPayment(data: CreatePaymentDto): Promise<Payment> {
@@ -30,6 +32,8 @@ export class PaymentService {
       ...data,
       profile,
     });
+
+    this.eventEmitter.emit(Events.PAYMENT_CREATED, payment);
 
     return payment;
   }

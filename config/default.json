@@ -8,5 +8,6 @@
     "PASSWORD": "@@MAIL_PASS",
     "SERVICE": "@@MAIL_SERVICE",
     "FROM": "@@MAIL_FROM"
-  }
+  },
+  "FE_BASE_URL": "@@FE_BASE_URL"
 }

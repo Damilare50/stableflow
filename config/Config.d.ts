@@ -7,6 +7,7 @@ declare module "node-config-ts" {
     PRIVY_APP_ID: string
     PRIVY_APP_SECRET: string
     MAIL: MAIL
+    FE_BASE_URL: string
   }
   interface MAIL {
     USER: string
