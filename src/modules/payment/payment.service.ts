@@ -10,7 +10,7 @@ import { Payment, Profile } from '../../schemas';
 import { CreatePaymentDto } from './dto';
 import { Model } from 'mongoose';
 import { isMongoId } from 'class-validator';
-import { AuthService } from '../general/auth.service';
+import { User } from '@privy-io/server-auth';
 
 @Injectable()
 export class PaymentService {
@@ -19,7 +19,6 @@ export class PaymentService {
   constructor(
     @InjectModel(Payment.name) private paymentModel: Model<Payment>,
     @InjectModel(Profile.name) private profileModel: Model<Profile>,
-    private authService: AuthService,
   ) {}
 
   async createPayment(data: CreatePaymentDto): Promise<Payment> {
@@ -36,31 +35,20 @@ export class PaymentService {
   }
 
   async fetchPayment(id: string): Promise<Payment> {
-    const validateID = isMongoId(id);
-    if (!validateID) throw new BadRequestException('invalid ID passed!');
-
     const payment = await this.paymentModel.findById(id).populate('profile');
     if (!payment) throw new NotFoundException();
 
     return payment;
   }
 
-  async listTransactions(authorization: string): Promise<Payment[]> {
-    const authToken: string = authorization.split(' ')[1];
-
-    const jwtDataResponse = await this.authService.decodeJwt(authToken);
-    this.logger.debug(jwtDataResponse);
-    if (!jwtDataResponse.isValid || !jwtDataResponse.data)
-      throw new UnauthorizedException('user is not authorized');
-
-    const { data: jwtData } = jwtDataResponse;
-    const user = await this.authService.getUserData(jwtData.userId);
+  async listTransactions(user: User): Promise<Payment[]> {
     this.logger.debug(user);
     if (!user) throw new UnauthorizedException('invalid userId');
 
     const walletAddress = user.wallet.address;
 
     const profile = await this.profileModel.findOne({ walletAddress }).exec();
+
     if (!profile) throw new UnauthorizedException('invalid user');
 
     const transactions: Payment[] = await this.paymentModel

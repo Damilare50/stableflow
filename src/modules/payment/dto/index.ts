@@ -37,3 +37,10 @@ export class CreatePaymentDto {
   @ApiProperty({ name: 'description', required: true })
   description: string;
 }
+
+export class MongoIdDto {
+  @IsNotEmpty()
+  @IsMongoId()
+  @ApiProperty({ name: 'id', required: true })
+  id: string;
+}
