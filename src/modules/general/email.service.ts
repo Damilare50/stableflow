@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { config } from 'node-config-ts';
 import { createTransport } from 'nodemailer';
 import * as Mail from 'nodemailer/lib/mailer';
@@ -6,6 +6,7 @@ import * as Mail from 'nodemailer/lib/mailer';
 @Injectable()
 export class EmailService {
   private transporter: Mail;
+  private logger: Logger = new Logger(EmailService.name);
 
   constructor() {
     this.transporter = createTransport({
@@ -30,7 +31,7 @@ export class EmailService {
       await this.transporter.sendMail(mailOptions);
       return true;
     } catch (error) {
-      console.error('Error sending email:', error);
+      this.logger.error('Error sending email:', error);
       return false;
     }
   }
