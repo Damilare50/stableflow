@@ -8,7 +8,6 @@ import { Model } from 'mongoose';
 import { Profile } from '../../schemas';
 import { CreateProfileDto } from './dto';
 import { EventEmitter2 } from '@nestjs/event-emitter';
-import { AuthService } from '../general/auth.service';
 import { User } from '@privy-io/server-auth';
 import { Events } from '../../enum';
 
@@ -17,7 +16,6 @@ export class ProfileService {
   constructor(
     @InjectModel(Profile.name) private profileModel: Model<Profile>,
     private eventEmitter: EventEmitter2,
-    private authService: AuthService,
   ) {}
 
   async #findProfile(walletAddress: string) {

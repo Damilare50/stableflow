@@ -3,6 +3,7 @@ import { ProfileService } from './profile.service';
 import { ProfileController } from './profile.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Profile, ProfileSchema } from '../../schemas';
+import { ProfileCreatedListener } from './listener';
 
 @Module({
   imports: [
@@ -10,6 +11,6 @@ import { Profile, ProfileSchema } from '../../schemas';
   ],
   exports: [ProfileService],
   controllers: [ProfileController],
-  providers: [ProfileService],
+  providers: [ProfileService, ProfileCreatedListener],
 })
 export class ProfileModule {}
