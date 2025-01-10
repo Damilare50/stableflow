@@ -33,7 +33,7 @@ export class PaymentService {
       profile,
     });
 
-    this.eventEmitter.emit(Events.PAYMENT_CREATED, payment);
+    await this.eventEmitter.emitAsync(Events.PAYMENT_CREATED, payment);
 
     return payment;
   }

@@ -13,6 +13,9 @@ export class Payment {
   customerName: string;
 
   @Prop({ required: true, type: String })
+  customerEmail: string;
+
+  @Prop({ required: true, type: String })
   paymentNetwork: string;
 
   @Prop({ required: true, type: String })

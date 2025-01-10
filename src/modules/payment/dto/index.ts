@@ -1,5 +1,11 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsMongoId, IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import {
+  IsMongoId,
+  IsNotEmpty,
+  IsNumber,
+  IsEmail,
+  IsString,
+} from 'class-validator';
 
 export class CreatePaymentDto {
   @IsMongoId()
@@ -11,6 +17,11 @@ export class CreatePaymentDto {
   @IsNotEmpty()
   @ApiProperty({ name: 'customerName', required: true })
   customerName: string;
+
+  @IsEmail()
+  @IsNotEmpty()
+  @ApiProperty({ name: 'customerEmail', required: true })
+  customerEmail: string;
 
   @IsString()
   @IsNotEmpty()
